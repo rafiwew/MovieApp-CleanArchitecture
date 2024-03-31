@@ -4,7 +4,7 @@ import com.piwew.movieapp_cleanarchitecture.core.data.source.local.entity.MovieE
 import com.piwew.movieapp_cleanarchitecture.core.data.source.local.room.MovieDao
 import kotlinx.coroutines.flow.Flow
 
-class LocalDataSource private constructor(private val movieDao: MovieDao) {
+class LocalDataSource constructor(private val movieDao: MovieDao) {
     fun getAllMovie(): Flow<List<MovieEntity>> = movieDao.getAllMovie()
 
     fun getFavoriteMovie(): Flow<List<MovieEntity>> = movieDao.getFavoriteMovie()

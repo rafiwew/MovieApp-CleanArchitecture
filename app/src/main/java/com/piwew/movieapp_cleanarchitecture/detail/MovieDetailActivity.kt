@@ -2,18 +2,17 @@ package com.piwew.movieapp_cleanarchitecture.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.piwew.movieapp_cleanarchitecture.R
 import com.piwew.movieapp_cleanarchitecture.core.domain.model.Movie
-import com.piwew.movieapp_cleanarchitecture.core.ui.ViewModelFactory
 import com.piwew.movieapp_cleanarchitecture.core.utils.loadImage
 import com.piwew.movieapp_cleanarchitecture.databinding.ActivityMovieDetailBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMovieDetailBinding
-    private val movieDetailViewModel by viewModels<MovieDetailViewModel> { ViewModelFactory.getInstance(this) }
+    private val movieDetailViewModel: MovieDetailViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

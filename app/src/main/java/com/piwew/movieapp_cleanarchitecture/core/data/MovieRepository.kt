@@ -11,7 +11,7 @@ import com.piwew.movieapp_cleanarchitecture.core.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class MovieRepository private constructor(
+class MovieRepository constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors,
@@ -41,19 +41,5 @@ class MovieRepository private constructor(
     override fun setFavoriteMovie(movie: Movie, state: Boolean) {
         val movieEntity = DataMapper.mapDomainToEntity(movie)
         appExecutors.diskIO().execute { localDataSource.setFavoriteMovie(movieEntity, state) }
-    }
-
-    companion object {
-        @Volatile
-        private var instance: MovieRepository? = null
-
-        fun getInstance(
-            remoteDataSource: RemoteDataSource,
-            localDataSource: LocalDataSource,
-            appExecutors: AppExecutors,
-        ): MovieRepository =
-            instance ?: synchronized(this) {
-                instance ?: MovieRepository(remoteDataSource, localDataSource, appExecutors)
-            }
     }
 }

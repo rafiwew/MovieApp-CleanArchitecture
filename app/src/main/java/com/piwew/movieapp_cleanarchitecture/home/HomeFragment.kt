@@ -6,21 +6,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.piwew.movieapp_cleanarchitecture.R
 import com.piwew.movieapp_cleanarchitecture.core.data.Resource
 import com.piwew.movieapp_cleanarchitecture.core.ui.MovieAdapter
-import com.piwew.movieapp_cleanarchitecture.core.ui.ViewModelFactory
 import com.piwew.movieapp_cleanarchitecture.databinding.FragmentHomeBinding
 import com.piwew.movieapp_cleanarchitecture.detail.MovieDetailActivity
 import com.piwew.movieapp_cleanarchitecture.detail.MovieDetailActivity.Companion.EXTRA_DATA
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val movieAdapter = MovieAdapter()
-    private val homeViewModel by viewModels<HomeViewModel> { ViewModelFactory.getInstance(requireContext()) }
+    private val homeViewModel: HomeViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
