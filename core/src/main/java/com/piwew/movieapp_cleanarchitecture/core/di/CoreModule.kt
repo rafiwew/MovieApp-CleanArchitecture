@@ -49,10 +49,6 @@ val repositoryModule = module {
     single { RemoteDataSource(get()) }
     factory { AppExecutors() }
     single<IMovieRepository> {
-        com.piwew.movieapp_cleanarchitecture.core.data.MovieRepository(
-            get(),
-            get(),
-            get()
-        )
+        MovieRepository(get(), get(), get())
     }
 }

@@ -16,4 +16,5 @@
     <string name="poster_image">Movie poster</string>
     <string name="overview">Overview</string>
     <string name="action_back">Back to menu</string>
+    <string name="title_favorite">Favorite</string>
 </resources>

@@ -11,7 +11,7 @@
         android:id="@+id/rv_movie"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_row_movie" />
+        tools:listitem="@layout/item_list_movie" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -25,6 +25,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_go"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_gravity="start|bottom"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/menu_favorite"
+        android:foregroundGravity="bottom"
+        android:src="@drawable/ic_favorite_outline"
+        app:backgroundTint="@color/red"
+        app:tint="@color/white" />
 
     <include
         android:id="@+id/view_error"

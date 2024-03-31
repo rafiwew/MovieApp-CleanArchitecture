@@ -8,7 +8,6 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.piwew.movieapp_cleanarchitecture.databinding.ActivityMainBinding
-import com.piwew.movieapp_cleanarchitecture.favorite.FavoriteFragment
 import com.piwew.movieapp_cleanarchitecture.home.HomeFragment
 import com.piwew.movieapp_cleanarchitecture.settings.SettingsFragment
 
@@ -54,7 +53,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.nav_favorite -> {
-                fragment = FavoriteFragment()
                 title = getString(R.string.menu_favorite)
             }
 
