@@ -1,8 +1,5 @@
 package com.piwew.movieapp_cleanarchitecture.core.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.switchMap
 import com.piwew.movieapp_cleanarchitecture.core.data.source.local.LocalDataSource
 import com.piwew.movieapp_cleanarchitecture.core.data.source.remote.RemoteDataSource
 import com.piwew.movieapp_cleanarchitecture.core.data.source.remote.network.ApiResponse
@@ -11,6 +8,8 @@ import com.piwew.movieapp_cleanarchitecture.core.domain.model.Movie
 import com.piwew.movieapp_cleanarchitecture.core.domain.repository.IMovieRepository
 import com.piwew.movieapp_cleanarchitecture.core.utils.AppExecutors
 import com.piwew.movieapp_cleanarchitecture.core.utils.DataMapper
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class MovieRepository private constructor(
     private val remoteDataSource: RemoteDataSource,
@@ -18,29 +17,25 @@ class MovieRepository private constructor(
     private val appExecutors: AppExecutors,
 ) : IMovieRepository {
 
-    override fun getAllMovie(): LiveData<Resource<List<Movie>>> =
+    override fun getAllMovie(): Flow<Resource<List<Movie>>> =
         object : NetworkBoundResource<List<Movie>, List<MovieResponse>>(appExecutors) {
-            override fun loadFromDB(): LiveData<List<Movie>> {
-                return localDataSource.getAllMovie().switchMap { data ->
-                    MutableLiveData(DataMapper.mapEntitiesToDomain(data))
-                }
+            override fun loadFromDB(): Flow<List<Movie>> {
+                return localDataSource.getAllMovie().map { DataMapper.mapEntitiesToDomain(it) }
             }
 
-            override fun createCall(): LiveData<ApiResponse<List<MovieResponse>>> =
+            override suspend fun createCall(): Flow<ApiResponse<List<MovieResponse>>> =
                 remoteDataSource.getAllMovie()
 
             override fun shouldFetch(data: List<Movie>?): Boolean = data.isNullOrEmpty()
 
-            override fun saveCallResult(data: List<MovieResponse>) {
+            override suspend fun saveCallResult(data: List<MovieResponse>) {
                 val movieList = DataMapper.mapResponsesToEntities(data)
                 localDataSource.insertMovie(movieList)
             }
-        }.asLiveData()
+        }.asFlow()
 
-    override fun getFavoriteMovie(): LiveData<List<Movie>> {
-        return localDataSource.getFavoriteMovie().switchMap { data ->
-            MutableLiveData(DataMapper.mapEntitiesToDomain(data))
-        }
+    override fun getFavoriteMovie(): Flow<List<Movie>> {
+        return localDataSource.getFavoriteMovie().map { DataMapper.mapEntitiesToDomain(it) }
     }
 
     override fun setFavoriteMovie(movie: Movie, state: Boolean) {

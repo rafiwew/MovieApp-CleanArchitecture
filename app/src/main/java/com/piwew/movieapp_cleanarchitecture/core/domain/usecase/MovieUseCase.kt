@@ -1,11 +1,11 @@
 package com.piwew.movieapp_cleanarchitecture.core.domain.usecase
 
-import androidx.lifecycle.LiveData
 import com.piwew.movieapp_cleanarchitecture.core.data.Resource
 import com.piwew.movieapp_cleanarchitecture.core.domain.model.Movie
+import kotlinx.coroutines.flow.Flow
 
 interface MovieUseCase {
-    fun getAllMovie(): LiveData<Resource<List<Movie>>>
-    fun getFavoriteMovie(): LiveData<List<Movie>>
+    fun getAllMovie(): Flow<Resource<List<Movie>>>
+    fun getFavoriteMovie(): Flow<List<Movie>>
     fun setFavoriteTourism(movie: Movie, state: Boolean)
 }
