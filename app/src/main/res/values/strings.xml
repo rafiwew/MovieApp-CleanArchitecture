@@ -8,9 +8,12 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="no_data">Empty data</string>
+    <string name="empty_favorite">Empty favorite</string>
     <string name="something_wrong">Oops.. something went wrong</string>
 
     <string name="release_date">Movie release date</string>
     <string name="backdrop_image">Movie image</string>
+    <string name="poster_image">Movie poster</string>
+    <string name="overview">Overview</string>
+    <string name="action_back">Back to menu</string>
 </resources>

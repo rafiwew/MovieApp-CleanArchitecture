@@ -35,7 +35,7 @@ object DataMapper {
                 originalLanguage = it.originalLanguage,
                 posterPath = it.posterPath,
                 backdropPath = it.backdropPath,
-                isFavorite = false
+                isFavorite = it.isFavorite
             )
         }
 

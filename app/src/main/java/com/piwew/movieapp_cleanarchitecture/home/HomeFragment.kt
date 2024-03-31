@@ -1,11 +1,11 @@
 package com.piwew.movieapp_cleanarchitecture.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.piwew.movieapp_cleanarchitecture.R
@@ -13,6 +13,8 @@ import com.piwew.movieapp_cleanarchitecture.core.data.Resource
 import com.piwew.movieapp_cleanarchitecture.core.ui.MovieAdapter
 import com.piwew.movieapp_cleanarchitecture.core.ui.ViewModelFactory
 import com.piwew.movieapp_cleanarchitecture.databinding.FragmentHomeBinding
+import com.piwew.movieapp_cleanarchitecture.detail.MovieDetailActivity
+import com.piwew.movieapp_cleanarchitecture.detail.MovieDetailActivity.Companion.EXTRA_DATA
 
 class HomeFragment : Fragment() {
 
@@ -36,10 +38,9 @@ class HomeFragment : Fragment() {
 
     private fun setupRecycleView() {
         movieAdapter.onItemClick = { selectedItem ->
-            Toast.makeText(requireActivity(), "$selectedItem", Toast.LENGTH_SHORT).show()
-            /*startActivity(Intent(activity, DetailMovieActivity::class.java)
+            startActivity(Intent(activity, MovieDetailActivity::class.java)
                 .apply { putExtra(EXTRA_DATA, selectedItem) }
-            )*/
+            )
         }
 
         with(binding.rvMovie) {
