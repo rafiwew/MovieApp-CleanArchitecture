@@ -10,5 +10,5 @@ class MovieInteractor(private val movieRepository: IMovieRepository) : MovieUseC
 
     override fun getFavoriteMovie(): Flow<List<Movie>> = movieRepository.getFavoriteMovie()
 
-    override fun setFavoriteTourism(movie: Movie, state: Boolean) = movieRepository.setFavoriteMovie(movie, state)
+    override fun setFavoriteMovie(movie: Movie, state: Boolean) = movieRepository.setFavoriteMovie(movie, state)
 }

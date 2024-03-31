@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "MovieApp-CleanArchitecture"
 include(":app")
+include(":core")

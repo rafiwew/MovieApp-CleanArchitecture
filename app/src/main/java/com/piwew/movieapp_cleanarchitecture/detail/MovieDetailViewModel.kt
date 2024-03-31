@@ -6,5 +6,5 @@ import com.piwew.movieapp_cleanarchitecture.core.domain.usecase.MovieUseCase
 
 class MovieDetailViewModel(private val movieUseCase: MovieUseCase) : ViewModel() {
     fun setFavoriteMovie(movie: Movie, newState: Boolean) =
-        movieUseCase.setFavoriteTourism(movie, newState)
+        movieUseCase.setFavoriteMovie(movie, newState)
 }

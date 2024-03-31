@@ -5,16 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.piwew.movieapp_cleanarchitecture.core.databinding.ItemListMovieBinding
 import com.piwew.movieapp_cleanarchitecture.core.domain.model.Movie
 import com.piwew.movieapp_cleanarchitecture.core.utils.loadImage
-import com.piwew.movieapp_cleanarchitecture.databinding.ItemRowMovieBinding
 
 class MovieAdapter : ListAdapter<Movie, MovieAdapter.ListViewHolder>(MovieDiffCallback()) {
 
     var onItemClick: ((Movie) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view = ItemRowMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val view = ItemListMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListViewHolder(view)
     }
 
@@ -23,7 +23,7 @@ class MovieAdapter : ListAdapter<Movie, MovieAdapter.ListViewHolder>(MovieDiffCa
         holder.bind(data)
     }
 
-    inner class ListViewHolder(private val binding: ItemRowMovieBinding) :
+    inner class ListViewHolder(private val binding: ItemListMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Movie) {
             with(binding) {

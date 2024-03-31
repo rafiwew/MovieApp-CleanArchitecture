@@ -15,13 +15,4 @@ class LocalDataSource constructor(private val movieDao: MovieDao) {
         movieEntity.isFavorite = newState
         movieDao.updateFavoriteMovie(movieEntity)
     }
-
-    companion object {
-        private var instance: LocalDataSource? = null
-
-        fun getInstance(tourismDao: MovieDao): LocalDataSource =
-            instance ?: synchronized(this) {
-                instance ?: LocalDataSource(tourismDao)
-            }
-    }
 }

@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
@@ -8,17 +8,14 @@ plugins {
 apply(from = "../shared_dependencies.gradle")
 
 android {
-    namespace = "com.piwew.movieapp_cleanarchitecture"
+    namespace = "com.piwew.movieapp_cleanarchitecture.core"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.piwew.movieapp_cleanarchitecture"
         minSdk = 24
-        targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -46,7 +43,25 @@ android {
 }
 
 dependencies {
-    implementation(project(":core"))
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation("androidx.core:core-ktx:1.12.0") // kotlin lang
+
+    // Kotlin lang
+    implementation("androidx.core:core-ktx:1.12.0")
+
+    // Room
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
+
+    // Retrofit library
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+
+    // Kotlin coroutine
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+
+    // Android architecture component
+    api("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
 }
