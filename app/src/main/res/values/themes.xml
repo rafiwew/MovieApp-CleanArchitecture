@@ -2,8 +2,32 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.MovieAppCleanArchitecture" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/teal_200</item>
+        <item name="colorPrimaryVariant">@color/teal_500</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/pink_200</item>
+        <item name="colorSecondaryVariant">@color/pink_500</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/light_black</item>
     </style>
 
     <style name="Theme.MovieAppCleanArchitecture" parent="Base.Theme.MovieAppCleanArchitecture" />
+
+    <style name="Theme.MovieAppCleanArchitecture.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.MovieAppCleanArchitecture.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- Toolbar -->
+    <style name="MyToolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="titleTextAppearance">@style/My_TextAppearance_Toolbar</item>
+    </style>
+
+    <style name="My_TextAppearance_Toolbar" parent="@style/TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">@font/montserrat</item>
+    </style>
+    <!-- End of Toolbar -->
+
 </resources>
