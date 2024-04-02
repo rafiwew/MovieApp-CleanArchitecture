@@ -2,38 +2,31 @@ package com.piwew.movieapp_cleanarchitecture.favorite
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.piwew.movieapp_cleanarchitecture.core.ui.MovieAdapter
-import com.piwew.movieapp_cleanarchitecture.databinding.FragmentFavoriteBinding
+import com.piwew.movieapp_cleanarchitecture.databinding.ActivityFavoriteBinding
 import com.piwew.movieapp_cleanarchitecture.detail.MovieDetailActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class FavoriteFragment : Fragment() {
+class FavoriteActivity : AppCompatActivity() {
 
-    private lateinit var binding: FragmentFavoriteBinding
+    private lateinit var binding: ActivityFavoriteBinding
     private val movieAdapter = MovieAdapter()
     private val favoriteViewModel: FavoriteViewModel by viewModel()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        binding = FragmentFavoriteBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityFavoriteBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.ivActionBack.setOnClickListener { onSupportNavigateUp() }
         setupRecycleView()
         observeFavoriteMovieData()
     }
 
     private fun observeFavoriteMovieData() {
-        favoriteViewModel.favoriteMovie.observe(viewLifecycleOwner) { favoriteItem ->
+        favoriteViewModel.favoriteMovie.observe(this) { favoriteItem ->
             movieAdapter.submitList(favoriteItem)
             binding.viewEmpty.root.visibility = if (favoriteItem.isNotEmpty()) View.GONE else View.VISIBLE
         }
@@ -42,15 +35,21 @@ class FavoriteFragment : Fragment() {
     private fun setupRecycleView() {
         movieAdapter.onItemClick = { selectedItem ->
             startActivity(
-                Intent(activity, MovieDetailActivity::class.java)
+                Intent(this, MovieDetailActivity::class.java)
                     .apply { putExtra(MovieDetailActivity.EXTRA_DATA, selectedItem) }
             )
         }
 
         with(binding.rvFavoriteMovie) {
-            layoutManager = LinearLayoutManager(requireContext())
-            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(this@FavoriteActivity)
+            setHasFixedSize(false)
             adapter = movieAdapter
         }
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
+    }
+
 }
